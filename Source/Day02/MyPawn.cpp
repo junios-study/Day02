@@ -3,11 +3,38 @@
 
 #include "MyPawn.h"
 
+#include "Components/BoxComponent.h"
+#include "Components/StaticMeshComponent.h"
+#include "GameFramework/SpringArmComponent.h"
+#include "GameFramework/FloatingPawnMovement.h"
+#include "Camera/CameraComponent.h"
+
+
 // Sets default values
 AMyPawn::AMyPawn()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
+	Box = CreateDefaultSubobject<UBoxComponent>(TEXT("Box"));
+	RootComponent = Box;
+	
+	Body = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Body"));
+	Body->SetupAttachment(Box);
+
+	Left = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Left"));
+	Left->SetupAttachment(Body);
+
+	Right = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Right"));
+	Right->SetupAttachment(Body);
+
+	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
+	SpringArm->SetupAttachment(Box);
+
+	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
+	Camera->SetupAttachment(SpringArm);
+
+	Movement = CreateDefaultSubobject<UFloatingPawnMovement>(TEXT("Movement"));
 
 }
 
