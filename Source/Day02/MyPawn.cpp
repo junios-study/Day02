@@ -8,6 +8,7 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "GameFramework/FloatingPawnMovement.h"
 #include "Camera/CameraComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 
 // Sets default values
@@ -57,10 +58,30 @@ void AMyPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+	PlayerInputComponent->BindAction(TEXT("Fire"), EInputEvent::IE_Pressed, this, &AMyPawn::Fire);
+
+	PlayerInputComponent->BindAxis(TEXT("Pitch"), this, &AMyPawn::Pitch);
+	PlayerInputComponent->BindAxis(TEXT("Roll"), this, &AMyPawn::Roll);
 }
 
 void AMyPawn::CallBlueprint(int Money, FString Name)
 {
 	UE_LOG(LogTemp, Warning, TEXT("Execute CPP %d %s"), Money, *Name);
+}
+
+void AMyPawn::Fire()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Fire"));
+}
+
+void AMyPawn::Pitch(float Value)
+{
+	AddActorLocalRotation(UGameplayStatics::GetWorldDeltaSeconds(GetWorld())* FRotator(Value, 0, 0) * 60);
+}
+
+void AMyPawn::Roll(float Value)
+{
+	AddActorLocalRotation(UGameplayStatics::GetWorldDeltaSeconds(GetWorld()) * FRotator(0, 0, Value) * 60);
+
 }
 

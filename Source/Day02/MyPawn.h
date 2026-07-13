@@ -59,4 +59,9 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void CallBlueprint(int Money, FString Name);
+
+
+	void Fire();
+	void Pitch(float Value);
+	void Roll(float Value);
 };
