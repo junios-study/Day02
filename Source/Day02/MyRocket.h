@@ -6,6 +6,8 @@
 #include "GameFramework/Actor.h"
 #include "MyRocket.generated.h"
 
+class UNiagaraSystem;
+
 UCLASS()
 class DAY02_API AMyRocket : public AActor
 {
@@ -22,5 +24,23 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	UFUNCTION()
+	void ProcessActorBeginOverlap(AActor* OverlappedActor, AActor* OtherActor);
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	TObjectPtr<UNiagaraSystem> ExplosionTemplate;
+
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	TObjectPtr<USoundBase> ExplosionSound;
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void CallCPPExecuteBP();
+
+	UFUNCTION(BlueprintNativeEvent)
+	void CallCPPExecuteBPDefault();
+	//void CallCPPExecuteBPDefault_Implementation();
+
 
 };
