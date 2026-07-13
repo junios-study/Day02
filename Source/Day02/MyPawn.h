@@ -55,4 +55,8 @@ public:
 
 	UPROPERTY(VisibleAnywhere, Category = "Components", BlueprintReadOnly)
 	float Boost = 0.5f;
+
+
+	UFUNCTION(BlueprintCallable)
+	void CallBlueprint(int Money, FString Name);
 };

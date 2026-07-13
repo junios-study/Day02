@@ -59,3 +59,8 @@ void AMyPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 }
 
+void AMyPawn::CallBlueprint(int Money, FString Name)
+{
+	UE_LOG(LogTemp, Warning, TEXT("Execute CPP %d %s"), Money, *Name);
+}
+

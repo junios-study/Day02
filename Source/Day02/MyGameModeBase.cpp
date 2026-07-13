@@ -10,6 +10,11 @@ AMyGameModeBase::AMyGameModeBase()
 	//CDO 초기화 할때 쓰는 함수
 	UE_LOG(LogTemp, Warning, TEXT("Hello World"));
 
+	if (GEngine)
+	{
+		GEngine->AddOnScreenDebugMessage(0, 3.0f, FColor::Red, TEXT("Hello World"));
+	}
+
 
 	//클래스 이름으로 저장하고 싶어요.
 	//Class Default Object
