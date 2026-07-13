@@ -29,6 +29,9 @@ AMyPawn::AMyPawn()
 	Right = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Right"));
 	Right->SetupAttachment(Body);
 
+	Left->SetWorldLocation(FVector(38.0f, -20.0f, 0.0f));
+	Right->SetWorldLocation(FVector(38.0f, 20.0f, 0.0f));
+
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
 	SpringArm->SetupAttachment(Box);
 
@@ -50,6 +53,9 @@ void AMyPawn::BeginPlay()
 void AMyPawn::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	Left->AddLocalRotation(FRotator(0, 0, 1440.0f * DeltaTime));
+	Right->AddLocalRotation(FRotator(0, 0, 1440.0f * DeltaTime));
 
 }
 
