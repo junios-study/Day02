@@ -40,7 +40,7 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent)
 	void CallCPPExecuteBPDefault();
-	//void CallCPPExecuteBPDefault_Implementation();
+	void CallCPPExecuteBPDefault_Implementation();
 
 
 };
