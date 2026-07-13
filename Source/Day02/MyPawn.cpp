@@ -9,6 +9,7 @@
 #include "GameFramework/FloatingPawnMovement.h"
 #include "Camera/CameraComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "MyRocket.h"
 
 
 // Sets default values
@@ -39,6 +40,12 @@ AMyPawn::AMyPawn()
 	Camera->SetupAttachment(SpringArm);
 
 	Movement = CreateDefaultSubobject<UFloatingPawnMovement>(TEXT("Movement"));
+
+	static ConstructorHelpers::FClassFinder<AMyRocket> ClassPath(TEXT("/Script/Engine.Blueprint'/Game/Blueprints/BP_Rocket.BP_Rocket_C'"));
+	if (ClassPath.Succeeded())
+	{
+		RocketTemplate = ClassPath.Class;
+	}
 
 }
 
@@ -78,6 +85,7 @@ void AMyPawn::CallBlueprint(int Money, FString Name)
 void AMyPawn::Fire()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Fire"));
+	GetWorld()->SpawnActor<AMyRocket>(RocketTemplate, Body->GetSocketTransform(TEXT("RocketSpawnPoint")));
 }
 
 void AMyPawn::Pitch(float Value)

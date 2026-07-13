@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -57,11 +57,14 @@ public:
 	float Boost = 0.5f;
 
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, meta=(DisplayName="이건 호출 하는거"))
 	void CallBlueprint(int Money, FString Name);
 
 
 	void Fire();
 	void Pitch(float Value);
 	void Roll(float Value);
+
+	UPROPERTY(EditAnywhere, Category = "Data", BlueprintReadWrite)
+	TSubclassOf<class AMyRocket> RocketTemplate;
 };
